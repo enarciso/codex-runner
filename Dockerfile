@@ -1,23 +1,31 @@
 # Base on Node LTS (includes npm)
-FROM node:20-slim
+FROM ubuntu:latest
+
+# steps to install docker to make ubuntu:dind
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates curl
+RUN install -m 0755 -d /etc/apt/keyrings
+RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+RUN chmod a+r /etc/apt/keyrings/docker.asc
+RUN echo \
+    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+    $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
+    tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 # Install deps: sudo, python, git, etc.
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    sudo python3 python3-pip git curl ca-certificates \
+    npm sudo python3-full python3-pip git docker-ce docker-ce-cli \
+    containerd.io docker-buildx-plugin docker-compose-plugin \
     && rm -rf /var/lib/apt/lists/*
-
-# Create non-root user 'ubuntu' with sudo privileges
-RUN useradd -ms /bin/bash ubuntu \
-    && echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # Install Codex CLI globally
 RUN npm install -g @openai/codex
 
-# Optional: install Python client libs
-RUN pip3 install --no-cache-dir openai tiktoken rich typer
+# Create non-root user 'ubuntu' with sudo privileges
+RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # Set working dir and switch to user
 WORKDIR /workspace
 USER ubuntu
 
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["/usr/bin/bash", "-l", "-c"]
