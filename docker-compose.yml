@@ -17,11 +17,13 @@ services:
     volumes:
       # Mount your repo dynamically on run
       - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock
       # Example: mounting project repo
       #- ${HOME}/my_project_repo:/workspace/my_project_repo
     working_dir: /workspace
     tty: true
     stdin_open: true
+    privileged: true
     entrypoint:
       - "/usr/bin/bash"
       - "-l"
