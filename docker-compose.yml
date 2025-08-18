@@ -5,6 +5,8 @@ services:
       dockerfile: Dockerfile
     container_name: codex-runner
     image: enarciso/codex-runner:latest
+    pull_policy: always
+    restart: no
     environment:
       # Remove if you want to mount your ${HOME}/.codex instead
       - OPENAI_API_KEY=${OPENAI_API_KEY}
