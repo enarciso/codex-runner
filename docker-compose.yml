@@ -22,6 +22,9 @@ services:
     working_dir: /workspace
     tty: true
     stdin_open: true
-    # No need to override USER here — Dockerfile already sets ubuntu
+    entrypoint:
+      - "/usr/bin/bash"
+      "-l"
+      "-c"
     command:
       - "bash"
