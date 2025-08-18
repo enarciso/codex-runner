@@ -26,7 +26,6 @@ RUN npm install -g @openai/codex
 RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # Add ubuntu to the docker group
-RUN groupadd docker
 RUN usermod -aG docker ubuntu
 
 # Set working dir and switch to user
