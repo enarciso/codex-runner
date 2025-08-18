@@ -24,7 +24,7 @@ services:
     stdin_open: true
     entrypoint:
       - "/usr/bin/bash"
-      "-l"
-      "-c"
+      - "-l"
+      - "-c"
     command:
       - "bash"
