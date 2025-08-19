@@ -74,7 +74,7 @@ docker exec -it codex-runner bash
 To run a one-off `codex` command via Docker without opening a shell:
 
 ```bash
-docker run --rm -e OPENAI_API_KEY="$OPENAI_API_KEY" enarciso/codex-runner:latest codex --help
+docker run --rm -e OPENAI_API_KEY="$OPENAI_API_KEY" enarciso/codex-runner:latest codex -p g5-mini-danger --ask-for-approval never --sandbox danger-full-access
 ```
 
 **Docker-in-Docker / socket notes and security**
