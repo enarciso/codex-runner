@@ -16,7 +16,7 @@ RUN echo \
 RUN apt-get update && apt-get install -y --no-install-recommends \
     npm sudo python3-full python3-pip git docker-ce docker-ce-cli \
     containerd.io docker-buildx-plugin docker-compose-plugin vim wget \
-    iputils-ping dnsutils traceroute \
+    iputils-ping dnsutils traceroute netcat-openbsd \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Codex CLI globally
