@@ -32,7 +32,7 @@ jobs:
         id: docker_build
         run: |
           if [ -f ./Dockerfile ]; then
-            docker buildx build --platform=linux/arm,linux/arm64,linux/amd64 \
+            docker buildx build --platform=linux/arm64,linux/amd64 \
             -t enarciso/codex-runner:latest \
             -t enarciso/codex-runner:${{ github.event.release.tag_name }} \
             --push \
