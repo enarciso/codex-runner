@@ -21,7 +21,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock
       # Example: mounting project repo
-      - ${HOME}/Projects:/workspace
+      - ${HOME}/Bastion:/workspace
       - ${HOME}/.codex:/home/ubuntu/.codex
     working_dir: /workspace
     tty: true
