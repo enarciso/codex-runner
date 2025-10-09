@@ -20,7 +20,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Codex CLI globally
-RUN npm install -g @openai/codex@0.42.0
+RUN npm install -g @openai/codex@0.46.0
 
 # Create non-root user 'ubuntu' with sudo privileges
 RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
