@@ -1,8 +1,7 @@
-name: Build Artifacts
+name: Build Artifacts - Daily
 on:
-  release:
-    types:
-      - released
+  schedule:
+    - cron: '0 0 * * *'  # Runs every day at midnight UTC
 
 jobs:
   build-image:
@@ -34,7 +33,6 @@ jobs:
           if [ -f ./Dockerfile ]; then
             docker buildx build --platform=linux/arm64,linux/amd64 \
             -t enarciso/codex-runner:latest \
-            -t enarciso/codex-runner:${{ github.event.release.tag_name }} \
             --push \
             -f ./Dockerfile .
           else
